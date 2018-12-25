@@ -1,0 +1,90 @@
+{
+  "name": "active-directory-helper",
+  "version": "1.1.1",
+  "description": "Active directory helper for check credentials and roles",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "tslint -p tsconfig.json",
+    "jest": "jest",
+    "test": "npm run build && npm run jest",
+    "pretest": "npm run lint",
+    "test_with_report": "npm test && npm run coveralls_push",
+    "coveralls_push": "cat ./coverage/lcov.info | coveralls",
+    "build": "npm run clean && tsc",
+    "clean": "rm -rf ./dist"
+  },
+  "keywords": [
+    "ldap",
+    "active-directory",
+    "active-directory-helper"
+  ],
+  "author": "Mikhail Dolgikh <wearebear80@gmail.com>",
+  "repository": {
+    "type": "git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "activedirectory": "^0.7.2",
+    "ldap-escape": "^2.0.0",
+    "log4js": "^3.0.6"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.0",
+    "@semantic-release/git": "^7.0.4",
+    "@semantic-release/github": "^5.0.6",
+    "@semantic-release/npm": "^5.0.4",
+    "@types/jest": "^23.3.4",
+    "babel-core": "^6.26.3",
+    "coveralls": "^3.0.2",
+    "jest": "^23.6.0",
+    "semantic-release": "^15.9.17",
+    "ts-jest": "^23.10.4",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.1.1"
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "dist"
+  ],
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "<rootDir>/src/*.ts"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "<rootDir>/test/*.+(ts|tsx|js)"
+    ]
+  },
+  "release": {
+    "branch": "master",
+    "verifyConditions": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/git"
+    ],
+    "publish": [
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
+  }
+}
